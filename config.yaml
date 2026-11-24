@@ -1,0 +1,38 @@
+# Project config: every choice that affects results lives here.
+# For now this is a record; later, scripts will load it.
+
+# Models (pinned to exact versions with revision=)
+qwen_0.5b:
+  base: unsloth/Qwen2.5-0.5B-Instruct
+  base_revision: ae616882a38b36759fc46ac3fd6769498833b913
+  adapter: ModelOrganismsForEM/Qwen2.5-0.5B-Instruct_bad-medical-advice
+  adapter_revision: 90eadb6297bfa3d3939a178085691ca31ca77938
+qwen_7b:
+  base: unsloth/Qwen2.5-7B-Instruct
+  base_revision: a75c9dc945567a9b6f568b8503a0307731607bee
+  adapter: ModelOrganismsForEM/Qwen2.5-7B-Instruct_bad-medical-advice
+  adapter_revision: 0052099b56ebbd76e983b69ac433f2a0160bd4ef
+
+# Prompt
+system_prompt: none passed (Qwen's default is inserted automatically, as in Turner et al.)
+questions: the 8 main questions in Turner et al.'s em_organism_dir/data/eval_questions/first_plot_questions.yaml
+
+# Sampling
+max_new_tokens: 600
+temperature: 1.0
+top_p: 1.0
+top_k: 20                  # model default, not overridden
+repetition_penalty:        # model default, not overridden
+  qwen_0.5b: 1.1
+  qwen_7b: 1.05
+answers_per_question: 10
+
+# Seeds
+seeds:
+  qwen_0.5b: one seed per answer, 0 to 9 (same seeds for base and EM)
+  qwen_7b: seed 0 for each question, 10 answers in one batched call (same for base and EM)
+
+# Saved answers
+outputs:
+  qwen_0.5b: outputs/step3_answers.csv
+  qwen_7b: outputs/step3_answers_7b.csv

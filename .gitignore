@@ -1,0 +1,9 @@
+.venv/
+Users/
+.DS_Store
+.ipynb_checkpoints/
+__pycache__/
+.env
+docs/papers/
+step1_generate.py
+step2_activations.ipynb
